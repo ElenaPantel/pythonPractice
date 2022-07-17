@@ -1,0 +1,67 @@
+# Напишите программу, которая принимает на вход вещественное число и показывает сумму его цифр.
+#- 6782 -> 23
+#- 0,56 -> 11
+
+def fun(num):
+    count = 0
+    for i in num:
+        if i.isdigit(): count += int(i)
+    return count
+num = input("Enter any float number with . : ")
+print(f"Sum of the digits in this number = {fun(num)}")
+
+
+# Напишите программу, которая принимает на вход число N и выдает набор произведений чисел от 1 до N.
+# пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
+
+num = int(input('Enter the number: '))
+factorial = 1
+for i in range(2, num + 1):
+    factorial *= i
+print(f'Factorial of {num} is {factorial}.')
+
+# Задайте список из n чисел последовательности $(1+\frac 1 n)^n$ и выведите на экран их сумму.
+# Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
+
+def Consequence(n):
+    list = []
+    sum = 0
+    for i in range(n):
+        list.append((1 + 1 / (i + 1)) ** (i + 1))
+        sum += list[i]
+        i += 1
+    print(list)
+    return sum
+n = input('Enter a number: ')
+print(Consequence(int(n)))
+
+# Задайте список из N элементов, заполненных числами из промежутка [-N, N]. 
+# Найдите произведение элементов на указанных позициях. 
+# Позиции хранятся в файле file.txt в одной строке одно число.
+
+def fill_array(num):
+    array=[]
+    for i in range(-num, num+1):
+        array.append(i)
+    return array
+
+def multiplex(arr, indices: str):
+    i1, i2 = map(int, indices.split(" "))
+    print(f"Multiplication result = {arr[i1]*arr[i2]}")
+
+n = int(input("Enter the number of elements N = "))
+arr = fill_array(n)
+print(arr)
+
+multiplex(arr, input(f"Enter the index of two numbers from 0 till {n*2} separated by a space: "))
+
+# Реализуйте алгоритм перемешивания списка.
+
+import random as r
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+for i in numbers:
+    j = r.randint(0, i + 1)
+    temp = numbers[j]
+    numbers[j] = numbers[-i]
+    numbers[-i] = temp
+print(numbers)
