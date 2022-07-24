@@ -1,0 +1,74 @@
+# 1. Вычислить число pi c заданной точностью d Пример:
+# - при $d = 0.001, π = 3.141.$    $10^{-1} ≤ d ≤10^{-10}$
+# Ряд Лейбница # округляет последнее число
+
+n=1
+namber_pi = 0
+while n < 1000000:
+    elem_pi = ((1/n)-(1/(n+2))) * 4 
+    namber_pi = namber_pi + elem_pi 
+    n = n + 4
+print(namber_pi)
+
+def accuracy_pi(d:str):
+    str_sp = d.split('.')
+    str_spfin = len(str_sp[-1])
+    return str_spfin
+
+print(round(namber_pi, accuracy_pi('0.001')))
+
+# 2 Задайте натуральное число N. Напишите программу, 
+# которая составит список простых множителей числа N.
+
+def list_m(n: int):
+    list_n = []
+    i = 2
+    while n != 1:
+        if n % i == 0:
+            list_n.append(i)
+            n = n // i
+        else:
+            i += 1
+    return list_n
+
+print(set(list_m(12)))
+
+
+# 3. Задайте последовательность чисел. Напишите программу, 
+# которая выведет список неповторяющихся элементов исходной последовательности.
+
+subsequence = [1, 2, 3, 1, 2, 3, 1, 2, 3]
+def sort_subsequence(sub: list):
+    sub2 = sorted(sub)
+    n = []
+    for i in sub2:
+        if i not in n:
+            n.append(i)
+    return n
+
+print(sort_subsequence(subsequence))
+
+
+#4. В текстовом файле удалить все слова, которые содержат
+#  хотя бы одну цифру.
+#В файле содержится, например:
+#Мама сшила м0не штаны и7з бере9зовой кор45ы 893.
+#  -> Мама сшила штаны.
+
+def rewrite_text_in_text_file(text: str):
+    text = 'Before: ' + text
+    with open ('text_file.txt', 'w') as text_info:
+        text_info.write(text)
+    with open ('text_file.txt', 'r') as text_info:
+        new_text = ""
+        for value in text_info:
+            new_text = value
+    for i in new_text:
+        if i.isdigit():
+            new_text = new_text.replace(str (i), "")
+    new_text = new_text.replace("Before: ", "After: ")
+    with open ('text_file.txt', 'a') as text_info:
+        text_info.writelines(f"\n{new_text}")
+        return [text, new_text]
+
+# print(rewrite_text_in_text_file("He5llo Wor44ld 2222"))
