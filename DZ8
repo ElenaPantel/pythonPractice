@@ -1,0 +1,35 @@
+# Создать информационную систему позволяющую работать с сотрудниками
+# некой компании \ студентами вуза \ учениками школы
+
+database = {}
+db = {'employees': 1, 'accounting staff': 2}
+
+
+def reading_file_to_dict(number_file):
+    with open(f'{number_file}.txt', 'r', encoding='utf-8') as file_1:
+        data = [i.split('\n')[0] for i in file_1.readlines()]
+        print(data)
+        database[number_file] = []
+        for i in data:
+            database[number_file].append(tuple(i.split(';')))
+
+
+def print_employees(surname):
+    id = [i[0] for i in database[db['accounting_staff']] if surname in i][0]
+    collegues = [i for i in database[db['employees']] if id == i[1]]
+    print(*[' '.join(i[2:4]) + '\n' for i in collegues])
+
+
+# выводит сведения о сотрудниках бухгалтерии
+def accounting_staff(departement_):
+    ids = [i[1] for i in database[db['employees']] if departement_ in i]
+    accounting_staff = [i for i in database[db['accounting_staff']] if i[0] in ids]
+    print(*[' '.join(i[1:4]) + '\n' for i in accounting_staff])
+
+
+reading_file_to_dict(1)
+reading_file_to_dict(2)
+print(database)
+print_employees('Fedotov')
+accounting_staff('departement2')
+# Создать решение для вывода сотрудников по фамилии
