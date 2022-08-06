@@ -1,0 +1,119 @@
+# Доделать реализацию функции eval со скобками
+
+# Напишите программу вычисления арифметического 
+# выражения заданного строкой. Добавить возможность 
+# использования скобок, меняющих приоритет операций 
+# решение Greg и Umid
+
+def find_res_from_str(str_equation):
+    list_opr = ['+', '-', '*', '/']
+    list_var = []
+    str_var = ''
+    for el in str_equation:
+        if el not in list_opr:
+            str_var += el
+        else:
+            list_var.append(int(str_var))
+            str_var = ''
+            list_var.append(el)
+    list_var.append(int(str_var))
+
+    result_equ = 0
+    i = 0
+
+    while('*' in list_var) or ('/' in list_var):
+        if list_var[i] == '*':
+            result_equ += list_var[i - 1] * list_var[i + 1]
+            list_var[i + 1] = result_equ
+            del list_var[i - 1: i + 1]
+            i = 0
+            result_equ = 0 
+        elif list_var[i] == '/':
+            result_equ += list_var[i - 1] / list_var[i + 1]
+            list_var[i + 1] = result_equ
+            del list_var[i - 1: i + 1]
+            i = 0
+            result_equ = 0
+        else:
+            i += 1
+
+    while('+' in list_var) or ('-' in list_var):
+        if list_var[i] == '+':
+            result_equ += list_var[i - 1] + list_var[i + 1]
+            list_var[i + 1] = result_equ
+            del list_var[i - 1: i + 1]
+            i = 0
+            result_equ = 0 
+        elif list_var[i] == '-':
+            result_equ += list_var[i - 1] - list_var[i + 1]
+            list_var[i + 1] = result_equ
+            del list_var[i - 1: i + 1]
+            i = 0
+            result_equ = 0
+        else:
+            i += 1
+
+    result_equ = list_var[0]
+    print(list_var)
+    return result_equ
+   
+result = find_res_from_str('1+2*3/4-1')
+print(result)
+
+
+# Дана последовательность чисел. 
+# Получить список уникальных элементов 
+# заданной последовательности.
+# Пример:
+# [1, 2, 3, 5, 1, 5, 3, 10] => [2, 10]
+list1 = [1,2,3,5,1,5,3,10]
+def find_unq_el(in_list1):
+    if in_list1 % 2 == 0:
+        return True
+    else:
+        return False
+
+out_filter = filter(find_unq_el, list1)
+print(f'Список уникальных элементов', list(out_filter))
+
+
+# Найти сумму чисел 
+# списка стоящих на нечетной позиции
+
+from re import I
+
+# list1 = [1, 4, 3, 4, 5, 6, 1]
+# list1 = [i for i in list1 if i % 2 != 0]
+# def sum_odd_position(sum):
+#     sum = 0 
+#     i = 1 
+#     for i in list1:
+#         sum += i
+
+#     return sum
+# list2 = [sum_odd_position(i) for i in list1]
+# print(list2)      
+
+# list1 = [1, 4, 3, 4, 5, 6, 1]
+# list2 = [i for i in list1 if i % 2 != 0]
+# print(list2)
+sum = 0
+list3 = [lambda i: not i % 2]
+print(list3)            
+
+
+# Для натурального n создать словарь 
+# индекс-значение, состоящий из элементов 
+# последовательности 3n + 1.
+# Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
+
+def sq_number(n):
+    dict = {}
+    if n == 0:
+        return 0
+    for n in range(1, n+1):
+        n = 3 * n + 1
+        dict.append(n)
+        for v in dict():
+            print(v)
+sq_number(8)
